@@ -13,7 +13,7 @@ app.add_middleware(
 
 @app.get("/")
 def home():
-    return {"message": "Backend running 🚀"}
+    return {"message": "Backend running"}
 
 @app.post("/login")
 def login(data: dict):
@@ -24,3 +24,22 @@ def login(data: dict):
         return {"success": True}
 
     return {"success": False}
+
+users = []  # simple memory storage (temporary)
+
+@app.post("/signup")
+def signup(data: dict):
+    email = data.get("email")
+    password = data.get("password")
+
+    # check if user exists
+    for user in users:
+        if user["email"] == email:
+            return {"success": False, "message": "User already exists"}
+
+    users.append({
+        "email": email,
+        "password": password
+    })
+
+    return {"success": True, "message": "Signup successful"}
