@@ -15,6 +15,7 @@ async function login() {
 
     if (data.success) {
       alert("Login successful 🚀");
+      window.location.href = "home.html";
     } else {
       alert("Invalid credentials ❌");
     }
